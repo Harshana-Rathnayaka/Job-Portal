@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('connection.php');
+require_once('db/connection.php');
 
 if (isset($_POST['Login'])) {
     if (empty($_POST['username']) || empty($_POST['password'])) {
