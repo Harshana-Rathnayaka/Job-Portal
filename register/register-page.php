@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['User'])) {
+    header("location:../welcome.php");
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,6 +68,15 @@
                         <div class="p-t-10">
                             <button class="btn btn--pill btn--green" type="submit" name="Register">REGISTER</button>
                         </div>
+                        <div class="text-center bg-blue">
+                            <span class="txt1">
+                                Already a member?
+                            </span>
+
+                            <a class="txt1 bo1 hov1" href="../login/login-page.php">
+                                Login now
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -69,8 +87,7 @@
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
     <script src="vendor/select2/select2.min.js"></script>
-    <script src="vendor/datepicker/moment.min.js"></script>
-    <script src="vendor/datepicker/daterangepicker.js"></script>
+
 
     <!-- Main JS-->
     <script src="js/global.js"></script>

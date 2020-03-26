@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['User'])) {
+    header("location:../welcome.php");
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,16 +39,16 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-                <form class="login100-form validate-form" action="../api/login.php" method="POST">
+                <form class="login100-form validate-form" action="../api/userLogin.php" method="POST">
                     <span class="login100-form-title p-b-55">
-						Login
-					</span>
+                        Login
+                    </span>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
                         <input class="input100" type="text" name="username" placeholder="Username">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
-							<span class="lnr lnr-envelope"></span>
+                            <span class="lnr lnr-envelope"></span>
                         </span>
                     </div>
 
@@ -47,31 +56,45 @@
                         <input class="input100" type="password" name="password" placeholder="Password">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
-							<span class="lnr lnr-lock"></span>
+                            <span class="lnr lnr-lock"></span>
                         </span>
                     </div>
 
                     <div class="contact100-form-checkbox m-l-4">
                         <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                         <label class="label-checkbox100" for="ckb1">
-							Remember me
-						</label>
+                            Remember me
+                        </label>
                     </div>
 
                     <div class="container-login100-form-btn p-t-25">
                         <button class="login100-form-btn">
-							Login
-						</button>
+                            Login
+                        </button>
                     </div>
+                    <?php
+                    if (@$_GET['Empty'] == true) {
+                    ?>
+                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Empty'] ?></div>
+                    <?php
+                    }
+                    ?>
+                    <?php
+                    if (@$_GET['Invalid'] == true) {
+                    ?>
+                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Invalid'] ?></div>
+                    <?php
+                    }
+                    ?>
 
                     <div class="text-center w-full p-t-115">
                         <span class="txt1">
-							Not a member?
-						</span>
+                            Not a member?
+                        </span>
 
                         <a class="txt1 bo1 hov1" href="../register/register-page.php">
-							Register now							
-						</a>
+                            Register now
+                        </a>
                     </div>
                 </form>
             </div>
