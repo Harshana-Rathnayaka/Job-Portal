@@ -1,7 +1,6 @@
 <?php
 
-// change username into name when connecting to amazon
-
+session_start();
 require_once '../includes/dbOperations.php';
 
 $response = array();
@@ -31,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($result == 1) {
 			$response['error'] = false;
 			$response['message'] = "User registered successfully";
+			$_SESSION['User'] = $_POST['username'];
+            header("location:../welcome.php");
 		} elseif ($result == 2) {
 			$response['error'] = true;
 			$response['message'] = "Some error occured, please try again";

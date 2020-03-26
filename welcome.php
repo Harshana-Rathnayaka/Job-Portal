@@ -4,5 +4,5 @@ if (isset($_SESSION['User'])) {
     echo "Welcome " . $_SESSION['User'] . '<br>';
     echo '<a href="logout.php?logout">Logout</a>';
 } else {
-    header('location:index.php');
+    header('location:login/login-page.html');
 }

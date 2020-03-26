@@ -5,12 +5,10 @@
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
+
 
     <!-- Title Page-->
-    <title>IPT - REGISTER</title>
+    <title>IPT - Register</title>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -20,7 +18,6 @@
 
     <!-- Vendor CSS-->
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
     <link href="css/main.css" rel="stylesheet" media="all">
@@ -33,34 +30,34 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Registration Info</h2>
-                    <form action="api/registerUser.php" method="POST">
+                    <form action="../api/registerUser.php" method="POST">
                         <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="First Name" name="firstname">
+                            <input class="input--style-3" type="text" placeholder="First Name" name="firstname" required>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Last Name" name="lastname">
+                            <input class="input--style-3" type="text" placeholder="Last Name" name="lastname" required>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-3" type="text" placeholder="Username" name="username">
+                            <input class="input--style-3" type="text" placeholder="Username" name="username" required>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-3" type="email" placeholder="Email" name="email">
+                            <input class="input--style-3" type="email" placeholder="Email" name="email" required>
                         </div>
                         <div class="input-group">
-                            <input class="input--style-3" type="password" placeholder="Password" name="password">
+                            <input class="input--style-3" type="password" placeholder="Password" name="password" required>
                         </div>
                         <div class="input-group">
                             <div class="rs-select2 js-select-simple select--no-search">
-                                <select name="gender">
+                                <select name="usertype">
                                     <option disabled="disabled" selected="selected">Account Type</option>
-                                    <option>Student</option>
-                                    <option>Company</option>
+                                    <option value="1">Student</option>
+                                    <option value="2">Company</option>
                                 </select>
                                 <div class="select-dropdown"></div>
                             </div>
                         </div>
                         <div class="p-t-10">
-                            <button class="btn btn--pill btn--green" type="submit">REGISTER</button>
+                            <button class="btn btn--pill btn--green" type="submit" name="Register">REGISTER</button>
                         </div>
                     </form>
                 </div>
