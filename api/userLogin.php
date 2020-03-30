@@ -15,9 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         if ($db->userLogin($_POST['username'], $_POST['password'])) {
+            
             // session and reroute
             $_SESSION['User'] = $_POST['username'];
-            header("location:../welcome.php");
+            header("location:../admin/index.php");
 
             // adding user data to json array
             $user = $db->getUserByUsername($_POST['username']);
@@ -41,4 +42,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
+// json output
 echo json_encode($response);

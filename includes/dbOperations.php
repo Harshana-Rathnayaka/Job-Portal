@@ -67,4 +67,28 @@ class DbOperations
 		$stmt->store_result();
 		return $stmt->num_rows > 0;
 	}
+
+	// retrieving pending requests
+	public function getPendingRequests()
+	{
+		$stmt = $this->con->prepare("SELECT CONCAT( `first_name`, ' ', `last_name`) AS 'Name', `username`, `user_status` FROM `users` WHERE `user_status` = 0 ");
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
+	// retrieving approved students
+	public function getApprovedStudents()
+	{
+		$stmt = $this->con->prepare("SELECT CONCAT( `first_name`, ' ', `last_name`) AS 'Name', `username`, `email` FROM `users` WHERE `user_status` = 1 ");
+		$stmt->execute();
+		return $stmt->get_result();
+	}
+
+	// retrieving approved companies
+	public function getApprovedCompanies()
+	{
+		$stmt = $this->con->prepare("SELECT CONCAT( `first_name`, ' ', `last_name`) AS 'Name', `username`, `email` FROM `users` WHERE `user_status` = 1 ");
+		$stmt->execute();
+		return $stmt->get_result();
+	}
 }

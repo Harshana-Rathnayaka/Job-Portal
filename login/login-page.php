@@ -86,6 +86,13 @@ if (isset($_SESSION['User'])) {
                     <?php
                     }
                     ?>
+                    <?php
+                    if (@$_GET['Error'] == true) {
+                    ?>
+                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Error'] ?></div>
+                    <?php
+                    }
+                    ?>
 
                     <div class="text-center w-full p-t-115">
                         <span class="txt1">
