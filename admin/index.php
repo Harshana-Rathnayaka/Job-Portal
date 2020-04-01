@@ -22,6 +22,9 @@ echo json_encode($msg);
 
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -100,49 +103,65 @@ echo json_encode($msg);
         </div>
 
         <div class="table-responsive">
-          <table class="table table-striped table-sm">
+          <table class="table table-bordered table-striped table-sm" id="requestTable">
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Status</th>
-                <th>Action</th>
+              <tr class="table-info">
+                <th width="5%">ID</th>
+                <th width="20%">Name</th>
+                <th width="15%">Username</th>
+                <th width="10%">Status</th>
+                <th width="20%">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <form action="edit/editreport.php" method="POST">
-                    <div class="form-group">
-                      <select class="form-control col-7" name="process">
-                        <option value="3">Confirm or Reject</option>
-                        <option value="1">Confirm</option>
-                        <option value="2">Reject</option>
-                      </select>
-                    </div>
-                    <button type="submit" class="btn btn-info">Update</button>
-                  </form>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
       </main>
     </div>
   </div>
-  <script src="js/jquery-3.3.1.slim.min.js"></script>
-  <!-- <script>
-    window.jQuery || document.write('<script src="js/jquery-slim.min.js">
-  </script>') -->
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/feather.min.js"></script>
-  <script src="js/Chart.min.js"></script>
   <script src="js/dashboard.js"></script>
+
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!--===============================================================================================-->
+  <!-- getting the json response data into html table using Ajax Jquery -->
+  <script>
+    $(document).ready(function() {
+      $.getJSON("http://localhost:80/api-ipt-web/api/pendingRequests.php").then(function(data) {
+
+        var requests = '';
+
+        $.each(data, function(key, value) {
+
+          requests += '<tr>';
+          requests += '<td>' + value.id + '</td>';
+          requests += '<td>' + value.name + '</td>';
+          requests += '<td>' + value.username + '</td>';
+          if (value.user_status == 0) {
+            requests += '<td> <span class="btn-warning">Pending </span> </td>';
+          }
+          requests += '<td> <form>';
+          requests += '<div class="form-group">';
+          requests += '<select class="form-control col-7" name="process">';
+          requests += '<option value="3">Confirm or Reject</option>';
+          requests += '<option value="1">Confirm</option>';
+          requests += '<option value="2">Reject</option>';
+          requests += '</select> </div>';
+          requests += '<button type="submit" class="btn btn-info">Update</button>';
+          requests += '</form></td>';
+          requests += '</tr>';
+
+        });
+
+        $('#requestTable').append(requests);
+
+      });
+    });
+  </script>
 </body>
 
 </html>

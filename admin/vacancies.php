@@ -102,17 +102,17 @@ echo json_encode($msg);
 
 
         <div class="table-responsive">
-          <table class="table table-striped table-sm">
+          <table class="table table-bordered table-striped table-sm">
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>Company</th>
-                <th>Category</th>
-                <th>Area</th>
-                <th>Job Type</th>
-                <th>Basic Salary</th>
-                <th>Deadline</th>
-                <th>Posted by</th>
+              <tr class="table-info">
+                <th width="3%">ID</th>
+                <th width="15%">Company</th>
+                <th width="15%">Category</th>
+                <th width="10%">Area</th>
+                <th width="13%">Job Type</th>
+                <th width="10%">Basic Salary</th>
+                <th width="13%">Deadline</th>
+                <th width="10%">Posted by</th>
               </tr>
             </thead>
             <tbody>

@@ -32,6 +32,8 @@ if (isset($_SESSION['User'])) {
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -68,31 +70,15 @@ if (isset($_SESSION['User'])) {
                     </div>
 
                     <div class="container-login100-form-btn p-t-25">
-                        <button class="login100-form-btn">
+                        <button class="login100-form-btn" onclick="send()">
                             Login
                         </button>
                     </div>
-                    <?php
-                    if (@$_GET['Empty'] == true) {
-                    ?>
-                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Empty'] ?></div>
-                    <?php
-                    }
-                    ?>
-                    <?php
-                    if (@$_GET['Invalid'] == true) {
-                    ?>
-                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Invalid'] ?></div>
-                    <?php
-                    }
-                    ?>
-                    <?php
-                    if (@$_GET['Error'] == true) {
-                    ?>
-                        <div class="alert-light text-danger text-center py-3"><?php echo $_GET['Error'] ?></div>
-                    <?php
-                    }
-                    ?>
+
+
+                    <div class="alert-light text-danger text-center py-3" id="msg"></div>
+
+
 
                     <div class="text-center w-full p-t-115">
                         <span class="txt1">
@@ -109,8 +95,6 @@ if (isset($_SESSION['User'])) {
     </div>
 
 
-
-
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
@@ -120,6 +104,8 @@ if (isset($_SESSION['User'])) {
     <script src="vendor/select2/select2.min.js"></script>
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
+
+   
 
 </body>
 

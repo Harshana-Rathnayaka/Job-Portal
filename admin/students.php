@@ -20,6 +20,9 @@ echo json_encode($msg);
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
 
   <style>
     .bd-placeholder-img {
@@ -97,36 +100,54 @@ echo json_encode($msg);
           <h1 class="h2">Dashboard</h1>
         </div>
         <div class="table-responsive">
-          <table class="table table-striped table-sm">
+          <table class="table table-bordered table-striped table-sm" id="studentTable">
             <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Email</th>
+              <tr class="table-info">
+                <th width="5%">ID</th>
+                <th width="15%">Name</th>
+                <th width="15%">Username</th>
+                <th width="20%">Email</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
         </div>
       </main>
     </div>
   </div>
-  <script src="js/jquery-3.3.1.slim.min.js"></script>
-  <!-- <script>
-    window.jQuery || document.write('<script src="js/jquery-slim.min.js">
-  </script>') -->
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/feather.min.js"></script>
   <script src="js/Chart.min.js"></script>
   <script src="js/dashboard.js"></script>
+
+  <!--===============================================================================================-->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!--===============================================================================================-->
+  <!-- getting the json response data into html table using Ajax Jquery -->
+  <script>
+    $(document).ready(function() {
+      $.getJSON("http://localhost:80/api-ipt-web/api/approvedStudents.php").then(function(data) {
+
+        var students = '';
+
+        $.each(data, function(key, value) {
+
+          students += '<tr>';
+          students += '<td>' + value.id + '</td>';
+          students += '<td>' + value.name + '</td>';
+          students += '<td>' + value.username + '</td>';
+          students += '<td>' + value.email + '</td>';
+          students += '</tr>';
+
+        });
+
+        $('#studentTable').append(students);
+
+      });
+    });
+  </script>
 </body>
 
 </html>

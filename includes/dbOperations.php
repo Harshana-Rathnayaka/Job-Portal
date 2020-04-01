@@ -71,7 +71,7 @@ class DbOperations
 	// retrieving pending requests
 	public function getPendingRequests()
 	{
-		$stmt = $this->con->prepare("SELECT CONCAT( `first_name`, ' ', `last_name`) AS 'Name', `username`, `user_status` FROM `users` WHERE `user_status` = 0 ");
+		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `user_status` FROM `users` WHERE `user_status` = 0 ");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
@@ -79,7 +79,7 @@ class DbOperations
 	// retrieving approved students
 	public function getApprovedStudents()
 	{
-		$stmt = $this->con->prepare("SELECT CONCAT( `first_name`, ' ', `last_name`) AS 'Name', `username`, `email` FROM `users` WHERE `user_status` = 1 ");
+		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email` FROM `users` WHERE `user_status` = 1 AND `user_type` = 1 ");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
@@ -87,7 +87,7 @@ class DbOperations
 	// retrieving approved companies
 	public function getApprovedCompanies()
 	{
-		$stmt = $this->con->prepare("SELECT CONCAT( `first_name`, ' ', `last_name`) AS 'Name', `username`, `email` FROM `users` WHERE `user_status` = 1 ");
+		$stmt = $this->con->prepare("SELECT `id`, CONCAT( `first_name`, ' ', `last_name`) AS 'name', `username`, `email` FROM `users` WHERE `user_status` = 1 AND `user_type` = 2");
 		$stmt->execute();
 		return $stmt->get_result();
 	}
