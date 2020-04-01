@@ -1,26 +1,26 @@
 <?php
 session_start();
-if (!isset($_SESSION['User'])) {
-  $msg = "You are currently logged out. Please log in to continue.";
-  // header('location:../login/login-page.php?Error=You are not logged in. Please log in to continue');
-  header('location:../login/login-page.php?Error=You are currently logged out. Please log in to continue.');
-}
-echo json_encode($msg);
+if (!$_SESSION['User']) {
+  $msg = "Session Not Started";
+  echo "<script>window.top.location='../login/login-page.php?msg=$msg'</script>";
+  //header("Location:index.php");
 
+}
 ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Pending Requests</title>
+  <title>Jobs</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet" />
 
   <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+
+
 
   <style>
     .bd-placeholder-img {
@@ -40,7 +40,7 @@ echo json_encode($msg);
 
 <body>
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">username here</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Username here</a>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class="nav-link" href="../logout.php?logout">Sign out</a>
@@ -55,41 +55,39 @@ echo json_encode($msg);
           <ul class="nav flex-column">
 
             <li class="nav-item">
-              <a class="nav-link active" href="index.php">
-                <span data-feather="user-plus"></span>
-                Pending Requests <span class="sr-only">(current)</span>
+              <a class="nav-link" href="index.php">
+                <span data-feather="info"></span>
+                Details
               </a>
             </li>
-
             <li class="nav-item">
-              <a class="nav-link" href="students.php">
-                <span data-feather="users"></span>
-                Students
+              <a class="nav-link" href="create-job.php">
+                <span data-feather="edit"></span>
+                Create a Job
               </a>
             </li>
-
             <li class="nav-item">
-              <a class="nav-link" href="companies.php">
-                <span data-feather="users"></span>
-                Companies
+              <a class="nav-link active" href="posted-jobs.php">
+                <span data-feather="list"></span>
+                Posted Jobs
               </a>
             </li>
-
             <li class="nav-item">
-              <a class="nav-link" href="vacancies.php">
-                <span data-feather="file-text"></span>
-                Posted Vacancies
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="changesettings.php">
+              <a class="nav-link" href="change-settings.php">
                 <span data-feather="settings"></span>
-                Change Settings
+                Account Settings
               </a>
             </li>
-
+            <li class="nav-item">
+              <a class="nav-link " href="http://localhost/api-api-web/">
+                <span data-feather="home"></span>
+                Home
+              </a>
+            </li>
           </ul>
+
+
+
         </div>
       </nav>
 
@@ -98,16 +96,19 @@ echo json_encode($msg);
           <h1 class="h2">Dashboard</h1>
 
         </div>
-
         <div class="table-responsive">
           <table class="table table-striped table-sm">
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Salary</th>
+                <th>Deadline</th>
+                <th>Applied</th>
+
+                <th> </th>
               </tr>
             </thead>
             <tbody>
@@ -116,18 +117,9 @@ echo json_encode($msg);
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>
-                  <form action="edit/editreport.php" method="POST">
-                    <div class="form-group">
-                      <select class="form-control col-7" name="process">
-                        <option value="3">Confirm or Reject</option>
-                        <option value="1">Confirm</option>
-                        <option value="2">Reject</option>
-                      </select>
-                    </div>
-                    <button type="submit" class="btn btn-info">Update</button>
-                  </form>
-                </td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             </tbody>
           </table>

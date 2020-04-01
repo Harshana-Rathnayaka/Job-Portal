@@ -1,12 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION['User'])) {
-    $msg = "You are currently logged out. Please log in to continue.";
-    // header('location:../login/login-page.php?Error=You are not logged in. Please log in to continue');
-    header('location:../login/login-page.php?Error=You are currently logged out. Please log in to continue.');
-}
-echo json_encode($msg);
+if (!$_SESSION['User']) {
+    $msg = "Session Not Started";
+    echo "<script>window.top.location='../login/login-page.php?msg=$msg'</script>";
+    //header("Location:index.php");
 
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -41,7 +40,7 @@ echo json_encode($msg);
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin Dashboard</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">username here</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="../logout.php?logout">Sign out</a>
@@ -57,39 +56,34 @@ echo json_encode($msg);
 
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">
-                                <span data-feather="user-plus"></span>
-                                Pending Requests <span class="sr-only">(current)</span>
+                                <span data-feather="info"></span>
+                                Details
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="students.php">
-                                <span data-feather="users"></span>
-                                Students
+                            <a class="nav-link" href="create-job.php">
+                                <span data-feather="edit"></span>
+                                Create a Job
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="companies.php">
-                                <span data-feather="users"></span>
-                                Companies
+                            <a class="nav-link" href="posted-jobs.php">
+                                <span data-feather="list"></span>
+                                Posted Jobs
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="vacancies.php">
-                                <span data-feather="file-text"></span>
-                                Posted Vacancies
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="changesettings.php">
+                            <a class="nav-link active" href="change-settings.php">
                                 <span data-feather="settings"></span>
-                                Change Settings
+                                Account Settings
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link " href="http://localhost/api-api-web/">
+                                <span data-feather="home"></span>
+                                Home
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -101,25 +95,45 @@ echo json_encode($msg);
                 </div>
 
                 <div class="container">
-                    <h2>Change Details</h2>
+                    <h2>Edit Details</h2>
 
-                    <form id="myform" action="edit/editdetails.php" method="post" enctype="multipart/form-data">
+                    <form id="myform" action="edit/editdetails.php" method="POST" enctype="multipart/form-data">
 
 
                         <div class="form-group">
                             <label>First Name :</label>
-                            <input type="text" class="form-control" value="" name="fname">
+                            <input type="text" class="form-control" value="" name="first-name" required="">
                         </div>
                         <div class="form-group">
                             <label>Last Name :</label>
-                            <input type="text" class="form-control" value="" name="lname">
+                            <input type="text" class="form-control" value="" name="last-name" required>
                         </div>
                         <div class="form-group">
-                            <label>User Name :</label>
-                            <input type="text" class="form-control" value="" name="uname">
+                            <label>Company Name :</label>
+                            <input type="text" class="form-control" value="" name="company-name" placeholder="Mass Global PVT Ltd." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Username :</label>
+                            <input type="text" class="form-control" value="" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password :</label>
+                            <input type="password" class="form-control" value="" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email :</label>
+                            <input type="email" class="form-control" value="" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Address :</label>
+                            <input type="text" class="form-control" value="" name="address" placeholder="No. 5, 5th Street, Colombo 07" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact :</label>
+                            <input type="tel" class="form-control" value="" name="contact" pattern="[0-9]{10}" placeholder="0773341555" required="">
                         </div>
 
-                        <button id="saveForm" type="button" class="btn btn-success">Update</button>
+                        <button id="saveForm" type="button" class="btn btn-success">Save</button>
                     </form>
                     <span id="result"></span>
                 </div>

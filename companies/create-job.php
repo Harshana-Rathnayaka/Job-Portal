@@ -1,27 +1,26 @@
 <?php
 session_start();
-if (!isset($_SESSION['User'])) {
-    $msg = "You are currently logged out. Please log in to continue.";
-    // header('location:../login/login-page.php?Error=You are not logged in. Please log in to continue');
-    header('location:../login/login-page.php?Error=You are currently logged out. Please log in to continue.');
-}
-echo json_encode($msg);
+if (!$_SESSION['User']) {
+    $msg = "Session Not Started";
+    echo "<script>window.top.location='../login/login-page.php?msg=$msg'</script>";
+    //header("Location:index.php");
 
+}
 ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Account Settings</title>
+    <title>Edit Details</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
     <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+
+
 
     <style>
         .bd-placeholder-img {
@@ -41,7 +40,7 @@ echo json_encode($msg);
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin Dashboard</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">username here</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="../logout.php?logout">Sign out</a>
@@ -57,40 +56,38 @@ echo json_encode($msg);
 
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">
-                                <span data-feather="user-plus"></span>
-                                Pending Requests <span class="sr-only">(current)</span>
+                                <span data-feather="info"></span>
+                                Details
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="students.php">
-                                <span data-feather="users"></span>
-                                Students
+                            <a class="nav-link active" href="create-job.php">
+                                <span data-feather="edit"></span>
+                                Create a Job
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="companies.php">
-                                <span data-feather="users"></span>
-                                Companies
+                            <a class="nav-link" href="posted-jobs.php">
+                                <span data-feather="list"></span>
+                                Posted Jobs
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="vacancies.php">
-                                <span data-feather="file-text"></span>
-                                Posted Vacancies
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="changesettings.php">
+                            <a class="nav-link" href="change-settings.php">
                                 <span data-feather="settings"></span>
-                                Change Settings
+                                Account Settings
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link " href="http://localhost/api-api-web/">
+                                <span data-feather="home"></span>
+                                Home
+                            </a>
+                        </li>
                     </ul>
+
+
+
                 </div>
             </nav>
 
@@ -101,25 +98,46 @@ echo json_encode($msg);
                 </div>
 
                 <div class="container">
-                    <h2>Change Details</h2>
+                    <h2>Job Details</h2>
 
-                    <form id="myform" action="edit/editdetails.php" method="post" enctype="multipart/form-data">
-
+                    <form id="myform" action="edit/editdetails.php?U_ID=<?php echo $U_ID; ?>" method="POST" enctype="multipart/form-data">
 
                         <div class="form-group">
-                            <label>First Name :</label>
-                            <input type="text" class="form-control" value="" name="fname">
+                            <label>Job Category :</label>
+                            <select class="form-control" name="category" required>
+                                <option value="0">Select the category</option>
+                                <option value="1">Software Engineer</option>
+                                <option value="2">QA Engineer</option>
+                                <option value="3">UI/UX Engineer</option>
+                                <option value="4">Mobile Developer</option>
+                                <option value="5">Web Developer</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Last Name :</label>
-                            <input type="text" class="form-control" value="" name="lname">
+                            <label>Job Type :</label>
+                            <select class="form-control" name="job-type" required>
+                                <option value="0">Select the type</option>
+                                <option value="1">Full time</option>
+                                <option value="2">Internship</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>User Name :</label>
-                            <input type="text" class="form-control" value="" name="uname">
+                            <label>Job Description :</label>
+                            <textarea class="form-control" name="description" rows="10" required></textarea>
                         </div>
-
-                        <button id="saveForm" type="button" class="btn btn-success">Update</button>
+                        <div class="form-group">
+                            <label>District :</label>
+                            <input type="text" class="form-control" value="" name="district" required placeholder="Colombo/Kandy/Gampaha">
+                        </div>
+                        <div class="form-group">
+                            <label>Salary :</label>
+                            <input type="text" class="form-control" value="" name="salary" required placeholder="25,000 /=">
+                        </div>
+                        <div class="form-group">
+                            <label>Deadline :</label>
+                            <input type="date" class="form-control" name="deadline" required max="2022-12-31">
+                        </div>
+                        <button id="saveForm" type="button" class="btn btn-primary">Post</button>
                     </form>
                     <span id="result"></span>
                 </div>

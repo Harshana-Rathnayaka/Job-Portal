@@ -1,27 +1,26 @@
 <?php
 session_start();
-if (!isset($_SESSION['User'])) {
-    $msg = "You are currently logged out. Please log in to continue.";
-    // header('location:../login/login-page.php?Error=You are not logged in. Please log in to continue');
-    header('location:../login/login-page.php?Error=You are currently logged out. Please log in to continue.');
-}
-echo json_encode($msg);
+if (!$_SESSION['User']) {
+    $msg = "Session Not Started";
+    echo "<script>window.top.location='../login/login-page.php?msg=$msg'</script>";
+    //header("Location:index.php");
 
+}
 ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Account Settings</title>
+    <title>Edit Details</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
 
     <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+
+
 
     <style>
         .bd-placeholder-img {
@@ -41,7 +40,7 @@ echo json_encode($msg);
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin Dashboard</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">username here</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="../logout.php?logout">Sign out</a>
@@ -57,40 +56,39 @@ echo json_encode($msg);
 
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">
-                                <span data-feather="user-plus"></span>
-                                Pending Requests <span class="sr-only">(current)</span>
+                                <span data-feather="info"></span>
+                                Details
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="upload-cv.php">
+                                <span data-feather="upload"></span>
+                                Upload CV
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="students.php">
-                                <span data-feather="users"></span>
-                                Students
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="companies.php">
-                                <span data-feather="users"></span>
-                                Companies
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="vacancies.php">
-                                <span data-feather="file-text"></span>
-                                Posted Vacancies
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="changesettings.php">
+                            <a class="nav-link active" href="edit-details.php">
                                 <span data-feather="settings"></span>
-                                Change Settings
+                                Edit Details
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="applied-jobs.php">
+                                <span data-feather="list"></span>
+                                Applied Jobs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="http://localhost/api-api-web/">
+                                <span data-feather="home"></span>
+                                Home
+                            </a>
+                        </li>
                     </ul>
+
+
+
                 </div>
             </nav>
 
@@ -103,20 +101,28 @@ echo json_encode($msg);
                 <div class="container">
                     <h2>Change Details</h2>
 
-                    <form id="myform" action="edit/editdetails.php" method="post" enctype="multipart/form-data">
+                    <form id="myform" action="edit/editdetails.php?U_ID=<?php echo $U_ID; ?>" method="POST" enctype="multipart/form-data">
 
 
                         <div class="form-group">
                             <label>First Name :</label>
-                            <input type="text" class="form-control" value="" name="fname">
+                            <input type="text" class="form-control" value="" name="first-name">
                         </div>
                         <div class="form-group">
                             <label>Last Name :</label>
-                            <input type="text" class="form-control" value="" name="lname">
+                            <input type="text" class="form-control" value="" name="last-name">
                         </div>
                         <div class="form-group">
-                            <label>User Name :</label>
-                            <input type="text" class="form-control" value="" name="uname">
+                            <label>Age :</label>
+                            <input type="text" class="form-control" value="" name="age">
+                        </div>
+                        <div class="form-group">
+                            <label>Email :</label>
+                            <input type="email" class="form-control" value="" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password :</label>
+                            <input type="password" class="form-control" value="" name="password">
                         </div>
 
                         <button id="saveForm" type="button" class="btn btn-success">Update</button>
